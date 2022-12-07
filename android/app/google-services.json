@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "830211437543",
+    "project_id": "tutoapp-fc94f",
+    "storage_bucket": "tutoapp-fc94f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830211437543:android:46afa3c18b1f536bdf8342",
+        "android_client_info": {
+          "package_name": "com.tutoapp.tuto_app2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830211437543-15173dnlj4cqkko4np7c0ss2hmncsafa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDTAvTGPQryFTtV6L3SJnaPC3pAhjYtWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830211437543-15173dnlj4cqkko4np7c0ss2hmncsafa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

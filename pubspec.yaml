@@ -1,0 +1,63 @@
+name: tuto_app
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.3+3
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  video_player: ^2.2.19
+  cupertino_icons: ^0.1.2
+  flutter_screenutil: ^0.4.2
+  animated_login: ^1.5.4
+  http: ^0.12.2
+  flutter_datetime_picker: ^1.5.1
+  camera:
+  path_provider: ^1.5.1
+  path: ^1.6.4
+  image_picker: ^0.6.7+14
+  dropdown_button2: ^1.8.9
+  uuid: ^3.0.7
+  cloudinary_public: ^0.7.0
+  shared_preferences: ^0.5.11
+
+
+
+dev_dependencies:
+  flutter_native_splash:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.10.0
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"
+
+
+flutter_native_splash:
+  color: "#FFFFFF"
+
+flutter:
+  uses-material-design: true
+  assets:
+   - assets/
+   - assets/logo.png
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: assets/CustomIcons.ttf
+
+    - family: Poppins-Bold
+      fonts:
+        - asset: assets/Poppins-Bold.ttf
+
+    - family: Poppins-Medium
+      fonts:
+        - asset: assets/Poppins-Medium.ttf

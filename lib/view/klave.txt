@@ -1,0 +1,8 @@
+C:\Users\josei\upload-keystore.jks
+password: 12345678
+nombre y apellido:Jose Antonio Camilo Ruiz
+nommbre de unidad de organizacion: tutuApp
+nombre de organizacion: tutuApp
+alias: tutoapp
+COMANDO PARA MIGRAR A (OLD)
+keytool -importkeystore -srckeystore key\key.jks -destkeystore key\key.jks -deststoretype pkcs12
