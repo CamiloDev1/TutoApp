@@ -13,71 +13,87 @@ class _ProfileTab_studentState extends State<ProfileTab_student> {
   String name = "";
   String correo = "";
   String rol = "";
+  Future<Map<String, dynamic>> _get_all_data() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // name =
+    // correo =
+    // rol =
+    return {
+      "name": await prefs.getString('name'),
+      "matricula": await prefs.getString('matricula'),
+      "rol": await prefs.getString('rol')
+    };
+    //Este codigo se ejecuta cada 20 segundos
+  }
 
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
-    // _get_data_profile();
     super.initState();
-    Timer miTimer = Timer.periodic(Duration(seconds: 1), (timer) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      name = await prefs.getString('name');
-      correo = await prefs.getString('matricula');
-      rol = await prefs.getString('rol');
-      //Este codigo se ejecuta cada 20 segundos
-    });
+    _get_all_data();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/student.png'),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                name,
-                style: TextStyle(
-                  fontFamily: 'Sacramento',
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+        body: FutureBuilder<Map<String, dynamic>>(
+          future: _get_all_data(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/student.png'),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      snapshot.data!["name"],
+                      style: TextStyle(
+                        fontFamily: 'Sacramento',
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                      width: 150,
+                      child: Divider(
+                        thickness: 1,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Card(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      color: Color.fromARGB(255, 219, 219, 219),
+                      child: ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text(snapshot.data!["rol"]),
+                      ),
+                    ),
+                    Card(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      color: Color.fromARGB(255, 219, 219, 219),
+                      child: ListTile(
+                        leading: Icon(Icons.mail),
+                        title: Text(snapshot.data!["matricula"]),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: 10,
-                width: 150,
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.black,
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                color: Color.fromARGB(255, 219, 219, 219),
-                child: ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text(rol),
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                color: Color.fromARGB(255, 219, 219, 219),
-                child: ListTile(
-                  leading: Icon(Icons.mail),
-                  title: Text(correo),
-                ),
-              )
-            ],
-          ),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
         ));
   }
 }

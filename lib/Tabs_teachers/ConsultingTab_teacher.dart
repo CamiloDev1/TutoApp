@@ -146,7 +146,9 @@ class _ConsultingTab_teacherState extends State<ConsultingTab_teacher> {
             print("Entro aqui");
             return Center(child: Text("No se pueden obtener los datos"));
           }
-          return Center();
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );

@@ -144,9 +144,11 @@ class _List_teachersState extends State<List_teachers> {
                   }));
             } else if (snapshot.hasError) {
               print(snapshot.error);
-              return Text("No se pueden obtener los datos");
+              return Center(child: CircularProgressIndicator());
             }
-            return Center();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }),
     );
   }

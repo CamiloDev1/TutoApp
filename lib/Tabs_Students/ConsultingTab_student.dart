@@ -263,9 +263,11 @@ class _ConsultingTab_studentState extends State<ConsultingTab_student> {
                   });
             } else if (snapshot.hasError) {
               print(snapshot.error);
-              return Center(child: Text("No se pueden obtener los datos"));
+              return Center(child: CircularProgressIndicator());
             }
-            return Center();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ));
   }

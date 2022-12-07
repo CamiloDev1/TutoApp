@@ -125,11 +125,9 @@ class _TutoringTab_studentState extends State<TutoringTab_student> {
                   }));
             } else if (snapshot.hasError) {
               print(snapshot.error);
-              return Text("No se pueden obtener los datos");
+              return Center(child: CircularProgressIndicator());
             }
-            return Center(
-              child: Text("No se obtuvieron datos"),
-            );
+            return Center(child: CircularProgressIndicator());
           }),
     );
   }

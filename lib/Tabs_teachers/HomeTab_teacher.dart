@@ -96,7 +96,9 @@ class _HomeTab_teacherState extends State<HomeTab_teacher> {
               print(snapshot.error);
               return Text("No se pueden obtener los datos");
             }
-            return Center();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
         floatingActionButton: FloatingActionButton(
