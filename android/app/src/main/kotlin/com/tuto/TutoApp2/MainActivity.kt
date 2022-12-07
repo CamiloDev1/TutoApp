@@ -1,4 +1,4 @@
-package com.tutoapp.TutoApp
+package com.tuto.TutoApp2
 
 import io.flutter.embedding.android.FlutterActivity
 

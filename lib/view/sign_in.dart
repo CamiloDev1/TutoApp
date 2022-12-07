@@ -69,6 +69,12 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> {
     super.dispose();
   }
 
+  late bool _passwordVisible;
+  @override
+  void initState() {
+    _passwordVisible = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -295,13 +301,30 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> {
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),
-            TextField(
+            TextFormField(
+              keyboardType: TextInputType.text,
               controller: myController_pass,
-              // obscureText: true,
+              obscureText:
+                  !_passwordVisible, //This will obscure text dynamically
               decoration: InputDecoration(
-                  hintText: "Contraseña",
-                  hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 61, 55, 55), fontSize: 14.0)),
+                labelText: 'Contraseña',
+                hintStyle: TextStyle(
+                    color: Color.fromARGB(255, 61, 55, 55), fontSize: 14.0),
+                // Here is key idea
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    // Based on passwordVisible state choose the icon
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onPressed: () {
+                    // Update the state i.e. toogle the state of passwordVisible variable
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                ),
+              ),
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(35),
