@@ -4,6 +4,7 @@ import 'dart:ffi';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuto_app/models/teacher.dart';
@@ -154,13 +155,8 @@ class _List_teachersState extends State<List_teachers> {
   }
 
   _new_request(context, correo, name_student, materia, name_teacher) async {
-    DateTime date = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        DateTime.now().hour,
-        DateTime.now().minute,
-        DateTime.now().second);
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
     final http.Response response = await http.post(
       'http://54.219.163.221:5001/students/agendar/',
       headers: <String, String>{
@@ -174,7 +170,7 @@ class _List_teachersState extends State<List_teachers> {
         "materia": materia,
         "program": "ids",
         "cuatri": "9",
-        "fecha": date.toString()
+        "fecha": formattedDate.toString()
       }),
     );
 

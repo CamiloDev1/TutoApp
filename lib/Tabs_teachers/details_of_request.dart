@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:tuto_app/models/Data_of_request.dart';
 import 'package:tuto_app/models/List_pending_teacher.dart';
 import 'package:http/http.dart' as http;
@@ -108,16 +109,11 @@ class _details_of_requestState extends State<details_of_request> {
                     final pos = splitted[1].length - 1;
                     final result = splitted[1].substring(0, pos);
                     print(result);
-                    DateTime date = DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        DateTime.now().hour,
-                        DateTime.now().minute,
-                        DateTime.now().second);
+                    DateTime now = DateTime.now();
+                    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
                     // print(splitted[1]);
-                    print(date);
-                    _acept_Consulting(result, date);
+                    print(formattedDate);
+                    _acept_Consulting(result, formattedDate);
                   },
                   icon: Icon(
                     Icons.check_circle,

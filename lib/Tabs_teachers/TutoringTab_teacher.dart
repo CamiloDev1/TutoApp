@@ -16,6 +16,7 @@ class TutoringTab_teacher extends StatefulWidget {
 class _TutoringTab_teacherState extends State<TutoringTab_teacher> {
   late Future<List<List_acept_teacher>> _listOfAcepted;
   List<List_acept_teacher> acepted = [];
+  List<List_acept_teacher> acepted_reverse = [];
 
   Future<List<List_acept_teacher>> _getCourses() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -39,6 +40,7 @@ class _TutoringTab_teacherState extends State<TutoringTab_teacher> {
               element['program'],
               element['fecha'],
               pendiente));
+          acepted_reverse = acepted.reversed.toList();
         }
       }
       return acepted;
@@ -77,7 +79,7 @@ class _TutoringTab_teacherState extends State<TutoringTab_teacher> {
             if (snapshot.hasData) {
               print(snapshot.data);
               return ListView.builder(
-                  itemCount: acepted.length,
+                  itemCount: acepted_reverse.length,
                   itemBuilder: ((context, index) {
                     return Center(
                       child: Padding(
@@ -94,8 +96,8 @@ class _TutoringTab_teacherState extends State<TutoringTab_teacher> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   ExpansionTile(
-                                    title: Text(acepted[index].materia),
-                                    subtitle: Text(acepted[index].name),
+                                    title: Text(acepted_reverse[index].materia),
+                                    subtitle: Text(acepted_reverse[index].name),
                                     trailing: Icon(
                                       _customTileExpanded
                                           ? Icons.arrow_drop_down_circle
@@ -103,8 +105,10 @@ class _TutoringTab_teacherState extends State<TutoringTab_teacher> {
                                     ),
                                     children: <Widget>[
                                       ListTile(
-                                          title: Text(acepted[index].pendiente),
-                                          subtitle: Text(acepted[index].fecha)),
+                                          title: Text(
+                                              acepted_reverse[index].pendiente),
+                                          subtitle: Text(
+                                              acepted_reverse[index].fecha)),
                                     ],
                                     onExpansionChanged: (bool expanded) {
                                       setState(

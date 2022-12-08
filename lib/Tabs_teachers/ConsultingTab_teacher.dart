@@ -16,6 +16,7 @@ class ConsultingTab_teacher extends StatefulWidget {
 class _ConsultingTab_teacherState extends State<ConsultingTab_teacher> {
   late Future<List<List_pending_teacher>> _listOfPendingTeacher;
   List<List_pending_teacher> PendingTeacher = [];
+  List<List_pending_teacher> PendingTeacher_reversed = [];
   Future<List<List_pending_teacher>> _getCourses() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String name = await prefs.getString('name');
@@ -37,6 +38,9 @@ class _ConsultingTab_teacherState extends State<ConsultingTab_teacher> {
               element['program'],
               element['fecha'],
               element['pendiente']));
+          PendingTeacher_reversed = PendingTeacher.reversed.toList();
+          print("*************");
+          print(PendingTeacher);
         }
       }
       return PendingTeacher;
@@ -74,7 +78,7 @@ class _ConsultingTab_teacherState extends State<ConsultingTab_teacher> {
           if (snapshot.hasData) {
             print(snapshot.data);
             return ListView.builder(
-                itemCount: PendingTeacher.length,
+                itemCount: PendingTeacher_reversed.length,
                 itemBuilder: (context, index) {
                   return Center(
                     child: Padding(
@@ -98,7 +102,7 @@ class _ConsultingTab_teacherState extends State<ConsultingTab_teacher> {
                                   ),
                                   title: Center(
                                       child: Text(
-                                    PendingTeacher[index].name,
+                                    PendingTeacher_reversed[index].name,
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 18),
                                   )),
@@ -116,14 +120,21 @@ class _ConsultingTab_teacherState extends State<ConsultingTab_teacher> {
                                         Navigator.pushNamed(
                                             context, '/details_of_request',
                                             arguments: Data_of_request(
-                                                PendingTeacher[index].id,
-                                                PendingTeacher[index].name,
-                                                PendingTeacher[index].docente,
-                                                PendingTeacher[index].matricula,
-                                                PendingTeacher[index].materia,
-                                                PendingTeacher[index].program,
-                                                PendingTeacher[index].fecha,
-                                                PendingTeacher[index]
+                                                PendingTeacher_reversed[index]
+                                                    .id,
+                                                PendingTeacher_reversed[index]
+                                                    .name,
+                                                PendingTeacher_reversed[index]
+                                                    .docente,
+                                                PendingTeacher_reversed[index]
+                                                    .matricula,
+                                                PendingTeacher_reversed[index]
+                                                    .materia,
+                                                PendingTeacher_reversed[index]
+                                                    .program,
+                                                PendingTeacher_reversed[index]
+                                                    .fecha,
+                                                PendingTeacher_reversed[index]
                                                     .pendiente));
                                       },
                                     ),

@@ -9,6 +9,7 @@ import 'package:tuto_app/Tabs_teachers/HomeTab_teacher.dart';
 import 'package:tuto_app/Tabs_teachers/ConsultingTab_teacher.dart';
 import 'package:tuto_app/Tabs_teachers/ProfileTab_teacher.dart';
 import 'package:tuto_app/Tabs_teachers/TutoringTab_teacher.dart';
+import 'package:tuto_app/Tabs_Students/acepted.dart';
 import 'package:flutter/material.dart';
 
 import '../models/Profile_loged.dart';
@@ -26,7 +27,7 @@ class _MainScreen_studentsState extends State<MainScreen_students>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 4);
+    _tabController = TabController(vsync: this, length: 5);
   }
 
   @override
@@ -103,6 +104,7 @@ class _MainScreen_studentsState extends State<MainScreen_students>
           HomeTab_student(),
           ConsultingTab_student(),
           TutoringTab_student(),
+          acepted(),
           ProfileTab_student(),
         ]),
         bottomNavigationBar: TabBar(
@@ -126,6 +128,12 @@ class _MainScreen_studentsState extends State<MainScreen_students>
             Tab(
                 icon: Icon(
               Icons.pending_actions,
+              size: 30.0,
+              color: Color.fromARGB(156, 0, 191, 255),
+            )),
+            Tab(
+                icon: Icon(
+              Icons.check_circle_rounded,
               size: 30.0,
               color: Color.fromARGB(156, 0, 191, 255),
             )),

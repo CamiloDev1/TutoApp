@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 
@@ -150,8 +151,11 @@ class _create_newsState extends State<create_news> {
                 print("Pulso boton publicar");
                 var titleStr = myController_title.text.toString();
                 var descriptionStr = myController_description.text.toString();
-                DateTime date = DateTime(DateTime.now().year,
-                    DateTime.now().month, DateTime.now().day);
+                // DateTime date = DateTime(DateTime.now().year,
+                //     DateTime.now().month, DateTime.now().day);
+
+                DateTime now = DateTime.now();
+                String formattedDate = DateFormat('yyyy-MM-dd').format(now);
                 var type = 1;
 
                 if (titleStr == null || descriptionStr == null) {
@@ -174,23 +178,14 @@ class _create_newsState extends State<create_news> {
 
                     print(response.secureUrl);
                     add(titleStr, descriptionStr, response.secureUrl,
-                        date.toString(), type.toString());
+                        formattedDate.toString(), type.toString());
                   } on CloudinaryException catch (e) {
                     print(e.message);
                     print(e.request);
-                    AlertDialog(
-                      title: Text("No se pudo publicar"),
-                      actions: [
-                        FloatingActionButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text("Cerrar"),
-                        )
-                      ],
-                    );
+                    Center(child: Text("No su pudo cargar la imagen"));
                   }
                 }
-
-                print("/" + date.toString() + "/");
+                print("/" + formattedDate.toString() + "/");
               },
               child: Text('Publicar'))
         ]),
@@ -246,6 +241,7 @@ class _create_newsState extends State<create_news> {
 
     if (response.statusCode == 200) {
       print(response.body);
+      Navigator.pushNamed(context, '/main_teachers');
     } else {
       throw Exception('Failed to get question paper.');
     }

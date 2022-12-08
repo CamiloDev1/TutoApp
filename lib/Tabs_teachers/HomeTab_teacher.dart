@@ -14,7 +14,7 @@ class HomeTab_teacher extends StatefulWidget {
 class _HomeTab_teacherState extends State<HomeTab_teacher> {
   late Future<List<News_teachers>> _listOfNewsForTeachers;
   List<News_teachers> news = [];
-
+  List<News_teachers> news_reversed = [];
   Future<List<News_teachers>> _getNews() async {
     final response = await http.get("http://13.56.20.66:5002/notices");
 
@@ -31,6 +31,7 @@ class _HomeTab_teacherState extends State<HomeTab_teacher> {
             element["image"],
             element["date"],
             element["type"].toString()));
+        news_reversed = news.reversed.toList();
       }
 
       return news;
@@ -57,7 +58,7 @@ class _HomeTab_teacherState extends State<HomeTab_teacher> {
             if (snapshot.hasData) {
               print(snapshot.data);
               return ListView.builder(
-                  itemCount: news.length,
+                  itemCount: news_reversed.length,
                   itemBuilder: (context, index) {
                     return Card(
                         elevation: 20.0,
@@ -65,18 +66,19 @@ class _HomeTab_teacherState extends State<HomeTab_teacher> {
                           children: [
                             ListTile(
                               title: Text(
-                                news[index].title,
+                                news_reversed[index].title,
                                 style: TextStyle(fontSize: 25),
                               ),
                               subtitle: Text(
-                                news[index].date,
+                                news_reversed[index].date,
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),
                             Container(
                               height: 200.0,
                               child: Image(
-                                image: NetworkImage(news[index].image_link),
+                                image: NetworkImage(
+                                    news_reversed[index].image_link),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -84,7 +86,7 @@ class _HomeTab_teacherState extends State<HomeTab_teacher> {
                               padding: EdgeInsets.all(16.0),
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                news[index].description,
+                                news_reversed[index].description,
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.black),
                               ),
